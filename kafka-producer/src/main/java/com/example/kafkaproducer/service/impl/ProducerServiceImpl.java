@@ -17,7 +17,7 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public POCResponseDTO produce(POCRequestDTO request) {
-        kafkaProducer.sendMessage(request.getMessage());
+        kafkaProducer.sendMessage(request);
         return null;
     }
 
