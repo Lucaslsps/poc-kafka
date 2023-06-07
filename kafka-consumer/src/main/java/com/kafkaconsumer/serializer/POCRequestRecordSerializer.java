@@ -1,0 +1,20 @@
+package com.kafkaconsumer.serializer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kafkaconsumer.requests.POCRequestDTO;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.Serializer;
+
+public class POCRequestRecordSerializer implements Serializer<ProducerRecord<String, POCRequestDTO>> {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public byte[] serialize(String topic, ProducerRecord<String, POCRequestDTO> data) {
+        try {
+            return objectMapper.writeValueAsBytes(data);
+        } catch (Exception e) {
+            throw new RuntimeException("Error serializing POCRequestDTO", e);
+        }
+    }
+}
